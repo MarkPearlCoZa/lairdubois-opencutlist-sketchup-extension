@@ -24,8 +24,9 @@ module Ladb
           #options.bbox_optimization =
           #options.presort = presort
           e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(2000,2000)
+          e.add_box(100,100)
           result = e.run
-          message = e.add_bin(100,100)
           expect(result).to eq [nil, 2]
         end
       end
