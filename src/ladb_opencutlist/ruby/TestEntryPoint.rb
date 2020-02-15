@@ -12,22 +12,30 @@ module Ladb
 
 
     describe BinPacking2D do
-      context "When testing the BinPacking Egning" do
-        it "should do something" do
-          options = BinPacking2D::Options.new
-          options.base_bin_length = 2750
-          options.base_bin_width = 1830
-          options.rotatable = false
-          options.saw_kerf = 1
-          options.trimming = 1
-          options.stacking = 1
-          #options.bbox_optimization =
-          #options.presort = presort
+      context "When testing the BinPacking Engine" do
+        options = BinPacking2D::Options.new
+        options.base_bin_length = 2750
+        options.base_bin_width = 1830
+        options.rotatable = false
+        options.saw_kerf = 1
+        options.trimming = 1
+        options.stacking = 1
+        #options.bbox_optimization =
+        #options.presort = presort
+        #
+        it "should return no placements if there are no boxes" do
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000,2000)
-          e.add_box(100,100)
           result = e.run
           expect(result).to eq [nil, 2]
+        end
+        it "should return no placements if there are no boxes" do
+          e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(2000,2000)
+          e.add_box(100,100);
+          result = e.run
+            ##expect(result).to eq [nil, 2]
+            # todo
         end
       end
     end

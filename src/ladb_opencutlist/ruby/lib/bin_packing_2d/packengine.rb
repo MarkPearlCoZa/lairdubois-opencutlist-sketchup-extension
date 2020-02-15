@@ -84,6 +84,5 @@ module Ladb::OpenCutList::BinPacking2D
         
       return packings[0], ERROR_NONE
     end
-    
   end
 end
