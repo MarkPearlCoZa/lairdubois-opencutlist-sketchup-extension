@@ -29,13 +29,17 @@ module Ladb
           result = e.run
           expect(result).to eq [nil, 2]
         end
-        it "should return no placements if there are no boxes" do
+        it "should return a single placement if there is one box that can fit" do
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000,2000)
           e.add_box(100,100);
           result = e.run
-            ##expect(result).to eq [nil, 2]
-            # todo
+          expect(result).is_a?(BinPacking2D)
+          expect(result).kind_of?(Array)
+          expect(result[0].saw_kerf).to eq 1
+            #expect(result[0].trimsize).to eq 1
+            #expect(result).to eq [nil, 2]
+            #expect(result.saw_kerf).to eq 1
         end
       end
     end
