@@ -36,8 +36,27 @@ module Ladb
           result = e.run
           expect(result).is_a?(BinPacking2D)
           expect(result).kind_of?(Array)
+          expect(result[0].score).to eq 0
           expect(result[0].saw_kerf).to eq 1
-            #expect(result[0].trimsize).to eq 1
+          # expect(result[0].trimsize).to eq 1
+          expect(result[0].split).to eq 0
+            #expect(result[0].rotatable).to eq false
+          expect(result[0].original_bins).kind_of?(Array)
+          expect(result[0].original_bins.length).to eq 1
+          expect(result[0].original_bins[0].length).to eq 2000
+          expect(result[0].original_bins[0].width).to eq 2000
+          expect(result[0].unplaced_boxes).kind_of?(Array)
+          expect(result[0].unused_bins).kind_of?(Array)
+            #expect(result[0].b_x).to eq 0
+            #expect(result[0].b_y).to eq 0
+            #expect(result[0].b_w).to eq 1830
+            #expect(result[0].b_l).to eq 2750
+          #expect(result[0].stacking_maxlength).to eq 2000
+          #expect(result[0].stacking_maxwidth).to eq 2000
+          expect(result[0].performance).kind_of?(Array)
+
+
+            #puts result.inspect
             #expect(result).to eq [nil, 2]
             #expect(result.saw_kerf).to eq 1
         end
