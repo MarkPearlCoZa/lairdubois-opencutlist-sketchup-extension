@@ -63,6 +63,9 @@ module Ladb
           expect(result[0].original_bins[0].cuts.length).to eq 2
           expect(result[0].original_bins[0].cuts[0].x).to eq 1
           expect(result[0].original_bins[0].cuts[0].y).to eq 101
+          expect(result[0].original_bins[0].cuts[0].length).to eq 1998
+          expect(result[0].original_bins[0].cuts[0].is_primary).to eq true
+          expect(result[0].original_bins[0].cuts[0].is_horizontal).to eq true
 
           #expect(result[0].original_bins[0].boxes[0].stack_is_horizontal).to eq true
 
