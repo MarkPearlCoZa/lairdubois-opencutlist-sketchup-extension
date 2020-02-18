@@ -49,6 +49,7 @@ module Ladb
           expect(result[0].original_bins[0].y).to eq 0
 
           expect(result[0].original_bins[0].boxes).kind_of?(Array)
+          expect(result[0].original_bins[0].boxes.length).to eq 1
           expect(result[0].original_bins[0].boxes[0].length).to eq 100
           expect(result[0].original_bins[0].boxes[0].width).to eq 100
           expect(result[0].original_bins[0].boxes[0].x).to eq 1
@@ -57,6 +58,12 @@ module Ladb
           expect(result[0].original_bins[0].boxes[0].data).to eq nil
           expect(result[0].original_bins[0].boxes[0].sboxes).kind_of?(Array)
           expect(result[0].original_bins[0].boxes[0].is_superbox).to eq false
+
+          expect(result[0].original_bins[0].cuts).kind_of?(Array)
+          expect(result[0].original_bins[0].cuts.length).to eq 2
+          expect(result[0].original_bins[0].cuts[0].x).to eq 1
+          expect(result[0].original_bins[0].cuts[0].y).to eq 101
+
           #expect(result[0].original_bins[0].boxes[0].stack_is_horizontal).to eq true
 
           #expect(result[0].original_bins[0].max_x).to eq 101
