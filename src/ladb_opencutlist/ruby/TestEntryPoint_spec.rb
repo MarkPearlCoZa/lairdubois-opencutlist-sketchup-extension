@@ -388,14 +388,22 @@ module Ladb
           #expect(result[0].performance.packing_quality).to eq 0
         end
       end
-    end
-
-    describe HelloWorld do
-      context "When testing the HelloWorld class" do
-        it "should say 'Hello World' when we call the say_hello method" do
-          hw = HelloWorld.new
-          message = hw.say_hello
-          expect(message).to eq "Hello World!"
+      context "When testing the BinPacking Engine with zero base bin width/length" do
+        options = BinPacking2D::Options.new
+        options.base_bin_length = 0
+        options.base_bin_width = 0
+        options.rotatable = false
+        options.saw_kerf = 1
+        options.trimming = 1
+        options.stacking = 1
+        #options.bbox_optimization =
+        #options.presort = presort
+        #
+        it "perfect fit" do
+          e = BinPacking2D::PackEngine.new(options)
+          result = e.run
+          expect(result).is_a?(BinPacking2D)
+          expect(result).to eq [nil, 2]
         end
       end
     end
