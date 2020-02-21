@@ -118,18 +118,32 @@ module Ladb
           #expect(result[0].original_bins[0].leftovers[1].bbox_done).to eq true
           #expect(result[0].original_bins[0].leftovers[1].cleaned).to eq true
 
+          expect(result[0].original_bins[0].trimmed).to eq true
+          expect(result[0].original_bins[0].trimsize).to eq 1
+          #expect(result[0].original_bins[0].bbox_done).to eq false
+
+
+          expect(result[0].unplaced_boxes).kind_of?(Array)
+          expect(result[0].unplaced_boxes.length).to eq 0
+
+          expect(result[0].unused_bins).kind_of?(Array)
+          expect(result[0].unused_bins.length).to eq 0
+
           #expect(result[0].original_bins[0].max_x).to eq 101
           #expect(result[0].original_bins[0].max_y).to eq 101
 
-          expect(result[0].unplaced_boxes).kind_of?(Array)
-          expect(result[0].unused_bins).kind_of?(Array)
             #expect(result[0].b_x).to eq 0
             #expect(result[0].b_y).to eq 0
             #expect(result[0].b_w).to eq 1830
             #expect(result[0].b_l).to eq 2750
           #expect(result[0].stacking_maxlength).to eq 2000
           #expect(result[0].stacking_maxwidth).to eq 2000
-          expect(result[0].performance).kind_of?(Array)
+          expect(result[0].performance.largest_leftover_length).to eq 1998
+          expect(result[0].performance.largest_leftover_width).to eq 1897
+          expect(result[0].performance.nb_bins).to eq 1
+          expect(result[0].performance.nb_boxes_packed).to eq 1
+          expect(result[0].performance.nb_leftovers).to eq 2
+            #expect(result[0].performance.packing_quality).to eq 0
 
 
             #puts result.inspect
