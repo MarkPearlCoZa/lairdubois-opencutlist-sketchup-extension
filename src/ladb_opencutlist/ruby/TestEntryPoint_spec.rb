@@ -3,6 +3,7 @@ module Ladb
 
     require_relative 'constants'
     require_relative 'lib/bin_packing_2d/packengine'
+    require 'rspec'
 
     class HelloWorld
       def say_hello
@@ -29,6 +30,7 @@ module Ladb
           result = e.run
           expect(result).to eq [nil, 2]
         end
+
         it "should return a single placement variation 2 if there is one box that can fit" do
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000,2000)
