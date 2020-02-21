@@ -89,7 +89,34 @@ module Ladb
           expect(result[0].original_bins[0].leftovers[0].boxes.length).to eq 0
           expect(result[0].original_bins[0].leftovers[0].cuts).kind_of?(Array)
           expect(result[0].original_bins[0].leftovers[0].cuts.length).to eq 0
-          #expect(result[0].original_bins[0].boxes[0].stack_is_horizontal).to eq true
+          expect(result[0].original_bins[0].leftovers[0].total_length_cuts).to eq 0
+          expect(result[0].original_bins[0].leftovers[0].efficiency).to eq 0
+          expect(result[0].original_bins[0].leftovers[0].leftovers).kind_of?(Array)
+          expect(result[0].original_bins[0].leftovers[0].leftovers.length).to eq 0
+          expect(result[0].original_bins[0].leftovers[0].trimmed).to eq false
+          expect(result[0].original_bins[0].leftovers[0].trimsize).to eq 1
+          #expect(result[0].original_bins[0].leftovers[0].bbox_done).to eq true
+          #expect(result[0].original_bins[0].leftovers[0].cleaned).to eq true
+
+          expect(result[0].original_bins[0].leftovers[1].length).to eq 1897
+          expect(result[0].original_bins[0].leftovers[1].width).to eq 100
+          expect(result[0].original_bins[0].leftovers[1].type).to eq 1
+          expect(result[0].original_bins[0].leftovers[1].x).to eq 102
+          expect(result[0].original_bins[0].leftovers[1].y).to eq 1
+          #expect(result[0].original_bins[0].leftovers[1].max_x).to eq 0
+          #expect(result[0].original_bins[0].leftovers[1].max_y).to eq 0
+          expect(result[0].original_bins[0].leftovers[1].boxes).kind_of?(Array)
+          expect(result[0].original_bins[0].leftovers[1].boxes.length).to eq 0
+          expect(result[0].original_bins[0].leftovers[1].cuts).kind_of?(Array)
+          expect(result[0].original_bins[0].leftovers[1].cuts.length).to eq 0
+          expect(result[0].original_bins[0].leftovers[1].total_length_cuts).to eq 0
+          expect(result[0].original_bins[0].leftovers[1].efficiency).to eq 0
+          expect(result[0].original_bins[0].leftovers[1].leftovers).kind_of?(Array)
+          expect(result[0].original_bins[0].leftovers[1].leftovers.length).to eq 0
+          expect(result[0].original_bins[0].leftovers[1].trimmed).to eq false
+          expect(result[0].original_bins[0].leftovers[1].trimsize).to eq 1
+          #expect(result[0].original_bins[0].leftovers[1].bbox_done).to eq true
+          #expect(result[0].original_bins[0].leftovers[1].cleaned).to eq true
 
           #expect(result[0].original_bins[0].max_x).to eq 101
           #expect(result[0].original_bins[0].max_y).to eq 101
