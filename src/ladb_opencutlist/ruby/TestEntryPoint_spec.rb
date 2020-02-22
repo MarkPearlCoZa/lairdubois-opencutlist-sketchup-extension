@@ -20,11 +20,19 @@ module Ladb
         options = BinPacking2D::Options.new
         options.base_bin_length = 2750
         options.base_bin_width = 1830
-        options.rotatable = false
+        options.rotatable = true
         options.saw_kerf = 1
         options.trimming = 1
         options.stacking = 1
         options.bbox_optimization = BinPacking2D::BBOX_OPTIMIZATION_ALWAYS
+        it "should return a double placement if there are two box that can fit in 2 bins" do
+          e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(30, 40)
+          e.add_bin(20, 20)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          result = e.run
+        end
         it "should return a double placement if there are two box that can fit" do
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
