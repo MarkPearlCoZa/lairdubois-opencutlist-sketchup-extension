@@ -1,6 +1,4 @@
-module Ladb::OpenCutList::BinPacking2D
-
-  class Packer < Packing2D
+module Ladb::OpenCutList::BinPacking2D class Packer < Packing2D
 
     attr_accessor :saw_kerf, :original_bins, :unplaced_boxes, :unused_bins, :score, :split, :performance
 

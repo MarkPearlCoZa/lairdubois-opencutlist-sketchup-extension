@@ -18,14 +18,73 @@ module Ladb
     describe BinPacking2D do
       context "When testing the BinPacking Engine bbox optimisation" do
         options = BinPacking2D::Options.new
+        options.rotatable = true
+        options.saw_kerf = 1
+        options.bbox_optimization = BinPacking2D::BBOX_OPTIMIZATION_ALWAYS
+        it "should return a double placement if there are two box that can fit in 2 bins" do
+          options.base_bin_length = 0
+          options.base_bin_width = 1830
+          options.stacking = BinPacking2D::STACKING_NONE
+          options.trimming = 0
+          e = BinPacking2D::PackEngine.new(options)
+          result = e.run
+          expect(result).is_a?(BinPacking2D)
+          expect(result).to eq [nil, BinPacking2D::ERROR_NO_BIN]
+        end
+      end
+      context "When testing the BinPacking Engine bbox optimisation" do
+        options = BinPacking2D::Options.new
         options.base_bin_length = 2750
         options.base_bin_width = 1830
         options.rotatable = true
         options.saw_kerf = 1
-        options.trimming = 1
-        options.stacking = 1
         options.bbox_optimization = BinPacking2D::BBOX_OPTIMIZATION_ALWAYS
         it "should return a double placement if there are two box that can fit in 2 bins" do
+          options.stacking = BinPacking2D::STACKING_NONE
+          options.trimming = 0
+          e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(400, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          result = e.run
+        end
+        it "should return a double placement if there are two box that can fit in 2 bins" do
+          options.stacking = BinPacking2D::STACKING_NONE
+          options.trimming = 1
+          #options.trimming = 0
+          e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(300, 600)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          result = e.run
+        end
+        it "should return a double placement if there are two box that can fit in 2 bins" do
+          options.stacking = BinPacking2D::STACKING_NONE
+          options.trimming = 1
+          e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(30, 40)
+          e.add_bin(2000, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          result = e.run
+        end
+        it "should return a double placement if there are two box that can fit in 2 bins" do
+          options.stacking = BinPacking2D::STACKING_WIDTH
+          options.trimming = 1
+          e = BinPacking2D::PackEngine.new(options)
+          e.add_bin(30, 40)
+          e.add_bin(2000, 300)
+          e.add_box(200, 300)
+          e.add_box(200, 300)
+          result = e.run
+        end
+        it "should return a double placement if there are two box that can fit in 2 bins" do
+          options.stacking = BinPacking2D::STACKING_LENGTH
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(30, 40)
           e.add_bin(20, 20)
@@ -34,6 +93,7 @@ module Ladb
           result = e.run
         end
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
           e.add_box(200, 300)
@@ -176,6 +236,7 @@ module Ladb
         options.stacking = 1
         options.bbox_optimization = BinPacking2D::BBOX_OPTIMIZATION_NONE
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
           e.add_box(200, 300)
@@ -308,6 +369,7 @@ module Ladb
 
         end
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           options.presort = BinPacking2D::PRESORT_INPUT_ORDER
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
@@ -441,6 +503,7 @@ module Ladb
 
         end
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           options.presort = BinPacking2D::PRESORT_PERIMETER_DECR
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
@@ -574,6 +637,7 @@ module Ladb
 
         end
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           options.presort = BinPacking2D::PRESORT_AREA_DECR
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
@@ -707,6 +771,7 @@ module Ladb
 
         end
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           options.presort = BinPacking2D::PRESORT_WIDTH_DECR
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
@@ -840,6 +905,7 @@ module Ladb
 
         end
         it "should return a double placement if there are two box that can fit" do
+          options.trimming = 1
           options.presort = BinPacking2D::PRESORT_LENGTH_DECR
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
@@ -974,6 +1040,7 @@ module Ladb
         end
 
         it "should return a single placement variation 2 if there is one box that can fit" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
           e.add_box(200, 300)
@@ -1090,6 +1157,7 @@ module Ladb
 
         end
         it "should return a single placement if there is one box that can fit" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(2000, 2000)
           e.add_box(100, 100)
@@ -1206,6 +1274,7 @@ module Ladb
 
         end
         it "should return a single placement if there is one box that can fit" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(200, 300)
           e.add_box(400, 500)
@@ -1326,6 +1395,7 @@ module Ladb
           #expect(result[0].performance.packing_quality).to eq 0
         end
         it "no bins" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_box(200, 300)
           result = e.run
@@ -1440,6 +1510,7 @@ module Ladb
           #expect(result[0].performance.packing_quality).to eq 0
         end
         it "perfect fit" do
+          options.trimming = 1
           e = BinPacking2D::PackEngine.new(options)
           e.add_bin(200, 300)
           e.add_box(200, 300)
@@ -1565,6 +1636,7 @@ module Ladb
       options.trimming = 1
       options.stacking = 1
       it "should return a single placement variation 2 if there is one box that can fit" do
+        options.trimming = 1
         e = BinPacking2D::PackEngine.new(options)
         e.add_bin(2000, 2000)
         e.add_box(200, 300)
