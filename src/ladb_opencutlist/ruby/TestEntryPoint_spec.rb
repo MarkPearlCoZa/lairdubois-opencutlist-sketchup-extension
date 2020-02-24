@@ -1772,9 +1772,11 @@ module Ladb
       options.rotatable = false
       options.saw_kerf = 1
       options.trimming = 1
-      options.stacking = 1
+      options.stacking = BinPacking2D::STACKING_LENGTH
       options.bbox_optimization = BinPacking2D::BBOX_OPTIMIZATION_NONE
+
       it "no bins" do
+        # Test 3
         options.trimming = 1
         e = BinPacking2D::PackEngine.new(options)
         e.add_box(200, 300)
