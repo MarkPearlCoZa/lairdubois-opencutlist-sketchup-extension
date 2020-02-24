@@ -1884,22 +1884,22 @@ module Ladb
       options.rotatable = false
       options.saw_kerf = 1
       options.trimming = 1
-      options.stacking = 1
+      options.stacking = BinPacking2D::STACKING_LENGTH
       options.presort = BinPacking2D::PRESORT_INPUT_ORDER
-      #options.bbox_optimization =
-      #options.presort = presort
-      #
+
       it "no bin" do
+        # Test 2
         e = BinPacking2D::PackEngine.new(options)
         result = e.run
         expect(result).is_a?(BinPacking2D)
-        expect(result).to eq [nil, 1]
+        expect(result).to eq [nil, BinPacking2D::ERROR_NO_BIN]
       end
-      it "should return no placements if there are no boxes" do
+      it "Test 1 : should return no placements if there are no boxes" do
+        # Test 1
         e = BinPacking2D::PackEngine.new(options)
         e.add_bin(2000, 2000)
         result = e.run
-        expect(result).to eq [nil, 2]
+        expect(result).to eq [nil, BinPacking2D::ERROR_NO_PLACEMENT_POSSIBLE]
       end
     end
   end
